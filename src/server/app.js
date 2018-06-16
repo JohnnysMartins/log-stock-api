@@ -1,10 +1,15 @@
 const restify = require('restify')
 const server = restify.createServer()
 const routes = require('../routes')
+const cors = require('./cors')
+const jwtMiddleware = require('./jwtMiddleware')
 
+const exclusions = ['/auth'];
 
+server.pre(cors.preflight)
+server.use(cors.actual)
 server.use(restify.plugins.bodyParser())
-
+server.use(jwtMiddleware({ exclusions }));
 routes(server)
 
 module.exports = server
