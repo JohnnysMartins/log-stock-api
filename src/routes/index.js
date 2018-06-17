@@ -1,7 +1,7 @@
 const auth = require('./auth')
+const user = require('./user')
 
-const routes = (server) => {
+module.exports = (server) => {
   auth(server)
+  user(server)
 }
-
-module.exports = routes
