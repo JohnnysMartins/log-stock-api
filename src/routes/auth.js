@@ -1,11 +1,10 @@
-module.exports = (server) => {
-  server.get('/auth', (req, res, next) => {
-    res.json({mesage: 'Seja bem-vindo', route: 'Rota de autenticacao'})
-    next()
-  })
-  
-  server.get('/path', (req, res, next) => {
-    res.json({mesage: 'rota de path !'})
-    next()
-  })
+module.exports = (server, db) => {
+	server.post('/auth', async (req, res, next) => {
+		try {
+			res.send(await db.auth().anthenticate(req.body));
+		} catch (error) {
+			res.send(error)
+		}
+		next()
+	});
 }

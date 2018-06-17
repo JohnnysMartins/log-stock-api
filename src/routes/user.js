@@ -1,8 +1,4 @@
-const mongoose = require('mongoose');
-const User = require('../models/user');
-const db = require('../services/mongo');
-
-module.exports = (server) => {
+module.exports = (server, db) => {
   server.get('/user', async (req, res, next) => {
     try {
       res.json(await db.user().findAll())
@@ -14,7 +10,7 @@ module.exports = (server) => {
 
   server.post('/signup', async (req, res, next) => {
     try {
-      res.json(await db.user().saveAll(req.body))
+      res.json(await db.user().save(req.body))
     } catch (err) {
       res.json({ error: err })
     }
