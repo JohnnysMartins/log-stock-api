@@ -7,12 +7,12 @@ const user = () => {
       return new Promise((resolve, reject) => {
         User.find()
           .select('-__v')
-          .exec((err, result) => {
+          .exec((err, users) => {
             if (err) {
               reject({ err })
               return
             }
-            resolve({ result })
+            resolve({ users })
           })
       })
     },
